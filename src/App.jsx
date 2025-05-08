@@ -1,13 +1,8 @@
-
-import './index.css'
+import Body from "./components/Body"
 function App() {
    
-
   return (
-    
-      <div className=' bg-red-600'>
-        Lets build Netflixgpt
-      </div>
+     <Body/>
       
   )
 }
