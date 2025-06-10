@@ -1,11 +1,16 @@
-import React from 'react'
 import Header from './Header'
-const Browse = () => {
-  return (
+import { useNowPlayingMovies } from '../hooks/useNowPlayingMovies'
+import MainContainer from './MainContainer';
+import SubContainer from './SubContainer';
 
-    <div className='flex  justify-between'>
+const Browse = () => {
+
+  useNowPlayingMovies();
+  return (
+    <div >
       <Header/>
-      
+      <MainContainer/>
+      <SubContainer/>
     </div>
   )
 }

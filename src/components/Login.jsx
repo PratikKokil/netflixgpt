@@ -4,7 +4,7 @@ import { validateData } from '../utils/validate';
 import '../index.css';
 import { auth } from '../utils/firebase'; // Import the initialized auth
 import {  createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile} from "firebase/auth";
-
+import userIcon from '../utils/Netflix-avatar.png';
 
 const Login = () => {
 
@@ -35,7 +35,8 @@ const Login = () => {
         // Signed up 
         const user = userCredential.user;
         updateProfile(user, {
-              displayName: name.current.value
+              displayName: name.current.value,
+              photoURL : userIcon
             }).then(() => {
                   const {uid,email,displayName,photoURL} = auth.currentUser;
                   dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
