@@ -1,9 +1,27 @@
 import React from 'react'
+import MovieList from './MovieList'
+import { useSelector } from 'react-redux'
 
 function SubContainer() {
-  return (
-    <div>SubContainer</div>
-  )
+    const movies = useSelector(store => store.movies)
+    console.log(movies.popularMovies);
+    
+    
+    return (
+        movies.nowPlayingMovies && (
+            <div className='bg-black min-h-screen'>
+                <div className='-mt-32 md:-mt-52 relative z-20 pb-10'>
+                    <div className='pt-4 space-y-2 md:space-y-4'>
+                        <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies}/>
+                        <MovieList title={"Trending Now"} movies={movies.nowPlayingMovies}/>
+                        <MovieList title={"Popular on Netflix"} movies={movies.popularMovies}/>
+                        <MovieList title={"Upcoming Movies"} movies={movies.nowPlayingMovies}/>
+                        <MovieList title={"Horror Movies"} movies={movies.nowPlayingMovies}/>
+                    </div>
+                </div>
+            </div>
+        )
+    )
 }
 
 export default SubContainer

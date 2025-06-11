@@ -46,7 +46,7 @@ const Header = () => {
             alt="User Avatar"
             className="w-9 h-9 rounded-full object-cover border"
           />
-          <span className="text-gray-800 font-medium">{user.displayName}</span>
+          <span className="text-white font-medium">{user.displayName}</span>
           <button
             onClick={handleSignOut}
             className="bg-red-500 hover:bg-red-600 text-white font-semibold px-3 py-1.5 rounded-md transition"
