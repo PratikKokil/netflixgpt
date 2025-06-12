@@ -2,7 +2,7 @@ import React from 'react'
 import MovieCard from './MovieCard'
 
 const MovieList = ({title,movies}) => {
-    
+    const filteredMovies = movies.filter((movie=>movie.poster_path))
   return (
     <div className='px-6'>
             <h1 className='text-3xl py-4 text-white'>{title}</h1>
@@ -10,7 +10,7 @@ const MovieList = ({title,movies}) => {
         
         <div className='flex'>
             {movies &&
-            movies.map(movie=> <MovieCard key={movie.id} posterPath={movie.poster_path} />) 
+            filteredMovies.map(movie=> <MovieCard key={movie.id} posterPath={movie.poster_path} />) 
             } 
           
         </div>
