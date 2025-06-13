@@ -1,15 +1,22 @@
 import React from 'react'
 import MovieCard from './MovieCard'
+import { useSelector } from 'react-redux'
 
 const MovieList = ({title,movies}) => {
-    const filteredMovies = movies.filter((movie=>movie.poster_path))
+  const filteredMovies = movies?.filter((movie=>movie.poster_path)) ||[];
+  if(filteredMovies.length == null){
+    return(
+      <div>Loading.....</div>
+    )
+  }
   return (
-    <div className='px-6'>
+
+      <div className='px-6'>
             <h1 className='text-3xl py-4 text-white'>{title}</h1>
         <div className='flex overflow-x-scroll'>
         
         <div className='flex'>
-            {movies &&
+            {filteredMovies.length>0 &&
             filteredMovies.map(movie=> <MovieCard key={movie.id} posterPath={movie.poster_path} />) 
             } 
           
