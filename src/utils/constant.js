@@ -19,3 +19,5 @@ export const SUPPORTED_LANGUAGES =[
  }
 
 ]
+
+export const GEMINI_KEY="AIzaSyC0Dh4z-HtcjYYs0xD1rCm544v5mylgGaQ"
