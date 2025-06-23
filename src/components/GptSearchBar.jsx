@@ -31,14 +31,14 @@ const GptSearchBar = () => {
       // if(!response){
       //   // <Error/>
       // }      
-       console.log(response.text)
+
        const movieList = response.text.split(",");
        const promiseArray=movieList.map(movie=>searchMovieTMDB(movie));
       
        const tmdbResults = await Promise.all(promiseArray);
-       console.log(tmdbResults);
+
        const filteredTmdbResults = tmdbResults.filter(movie=>movie.original_language="hi")
-       console.log(filteredTmdbResults);
+
        dispatch(addGptMovieResults({movieNames:movieList,gptMovieResults:filteredTmdbResults}))
   }
   

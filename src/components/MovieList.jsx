@@ -1,66 +1,75 @@
-// import React from 'react'
-// import MovieCard from './MovieCard'
-// import { useSelector } from 'react-redux'
-
-// const MovieList = ({title,movies}) => {
-//   const filteredMovies = movies?.filter((movie=>movie.poster_path)) ||[];
-//   if(filteredMovies.length == null){
-//     return(
-//       <div>Loading.....</div>
-//     )
-//   }
-//   return (
-
-//       <div className='px-6'>
-//             <h1 className='text-3xl py-4 text-white'>{title}</h1>
-//         <div className='flex overflow-x-scroll'>
-        
-//         <div className='flex'>
-//             {filteredMovies.length>0 &&
-//             filteredMovies.map(movie=> <MovieCard key={movie.id} posterPath={movie.poster_path} />) 
-//             } 
-          
-//         </div>
-//         </div>
-        
-//     </div>
-//   )
-// }
-
-// export default MovieList
+import React, { useRef } from 'react';
+import MovieCard from './MovieCard';
+import { ChevronLeft, ChevronRight } from 'lucide-react'; 
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { toggleGptSearchView } from '../utils/GptSlice';
 
 
-import React from 'react'
-import MovieCard from './MovieCard'
+const MovieList = ({ title, movies }) => {
+  const scrollRef = useRef();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const filteredMovies = movies?.filter((movie) => movie.poster_path) || [];
 
-const MovieList = ({title, movies}) => {
-    const filteredMovies = movies?.filter((movie=> movie.poster_path ))||[] ;
-    if(filteredMovies.length === null){
-      return(
-       <div>Loading.....</div>
-      )
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const amount = direction === 'left' ? -300 : 300;
+      scrollRef.current.scrollBy({ left: amount, behavior: 'smooth' });
     }
-   
-    return (
-        <div className='px-4 md:px-12 mt-4 space-y-8'>
-            <div>
-                <h1 className='text-white text-md md:text-xl lg:text-2xl font-semibold mb-4 hover:text-gray-300 transition-colors duration-200'>
-                    {title}
-                </h1>
-                <div className='relative group/main'>
-                    <div className='flex space-x-0.5 overflow-x-scroll scrollbar-hide pb-6 group-hover/main:overflow-x-auto'>
-                        {filteredMovies.length>0 &&
-                            filteredMovies.map(movie => (
-                                <div key={movie.id} className='min-w-[180px] md:min-w-[200px] lg:min-w-[240px] transform transition-transform duration-300 hover:scale-110 hover:z-10 cursor-pointer'>
-                                    <MovieCard posterPath={movie.poster_path} />
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
+  };
+  const handleMovieClick =(movieid)=>{
+    navigate(`/movie/${movieid}`)
+    dispatch(toggleGptSearchView());
+  }
 
-export default MovieList
+  if (filteredMovies.length === 0) {
+    return <div className="text-white text-center">Loading...</div>;
+  }
+
+  return (
+    <div className="px-4 md:px-12 mt-4 space-y-8">
+      <div>
+        <h1 className="text-white text-md md:text-xl lg:text-2xl font-semibold mb-4 hover:text-gray-300 transition-colors duration-200">
+          {title}
+        </h1>
+
+        <div className="relative group/main">
+          {/* Left Arrow */}
+          <button
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/60 p-2 z-10 rounded-full hidden group-hover/main:block"
+            onClick={() => scroll('left')}
+          >
+            <ChevronLeft className="text-white" size={24} />
+          </button>
+
+          {/* Movie Scroll Container */}
+          <div
+            ref={scrollRef}
+            className="flex space-x-0.5 overflow-x-scroll scrollbar-hide pb-6 scroll-smooth"
+          >
+            {filteredMovies.map((movie) => (
+              <div
+                key={movie.id}
+                onClick={()=>handleMovieClick(movie.id)}
+                className="min-w-[180px] md:min-w-[200px] lg:min-w-[240px] transform transition-transform duration-300 hover:scale-110 hover:z-10 cursor-pointer"
+              >
+                  <MovieCard posterPath={movie.poster_path} />
+              </div>
+            ))}
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/60 p-2 z-10 rounded-full hidden group-hover/main:block"
+            onClick={() => scroll('right')}
+          >
+            <ChevronRight className="text-white" size={24} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MovieList;

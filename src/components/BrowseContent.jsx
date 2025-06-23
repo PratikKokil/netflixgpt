@@ -1,17 +1,13 @@
-import Header from './Header'
 import { useNowPlayingMovies } from '../hooks/useNowPlayingMovies'
 import MainContainer from './MainContainer';
 import SubContainer from './SubContainer';
-import GptSearch from './gptSearch';
 import { usePopularMovies } from '../hooks/usePopularMovies';
 import { useTrendingMovies } from '../hooks/useTrendingMovies';
 import { useUpcomingMovies } from '../hooks/useUpcomingMovies';
 import { useHorrorMovies } from '../hooks/useHorrorMovies';
-import { useSelector } from 'react-redux';
 
-const Browse = () => {
-  const showGptSearch = useSelector(store=>store.gpt.showGptSearch)
-
+const BrowseContent = () => {
+  // Fetch all movie data
   useNowPlayingMovies();
   usePopularMovies();
   useTrendingMovies();
@@ -19,19 +15,11 @@ const Browse = () => {
   useHorrorMovies();
 
   return (
-    <div >
-      <Header/>
-
-      {showGptSearch ? <GptSearch/>:
-       <>
+    <div>
       <MainContainer/>
       <SubContainer/>
-      </>}
-
-
-      
     </div>
   )
 }
 
-export default Browse
+export default BrowseContent

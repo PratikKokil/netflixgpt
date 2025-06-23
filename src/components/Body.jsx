@@ -1,32 +1,48 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { RouterProvider } from 'react-router-dom';
-import '../index.css'
-import "./Login"
-
+// Body.js - Main routing component
 import Login from './Login';
-import Browse from './Browse';
+import Header from './Header';
+import BrowseContent from './BrowseContent';
+import GptSearch from './gptSearch';
+import MovieInfo from './MovieInfo';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 
-
-const Body = () => {
-
-  const approuter = createBrowserRouter([
-    {
-      path:"/",
-      element:<Login/>
-    },
-    {
-      path:"/browse",
-      element:<Browse/>
-    }
-])
- 
+// Layout component for routes that need header
+const AppLayout = () => {
   return (
     <div>
-     <RouterProvider router={approuter}/>
+      <Header />
+      <Outlet />
     </div>
-    
-  )
-}
+  );
+};
+
+const approuter = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />
+  },
+  {
+    path: "/",
+    element: <AppLayout />, // Layout with header
+    children: [
+      {
+        path: "browse",
+        element: <BrowseContent />
+      },
+      {
+        path: "search", 
+        element: <GptSearch />
+      },
+      {
+        path: "movie/:movieid",
+        element: <MovieInfo />
+      }
+    ]
+  }
+]);
+
+const Body = () => {
+  return <RouterProvider router={approuter} />;
+};
 
 export default Body;
-

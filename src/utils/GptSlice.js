@@ -19,6 +19,5 @@ const gptSlice = createSlice({
     }
 });
 
-
 export default gptSlice.reducer;
 export const{toggleGptSearchView,addGptMovieResults} = gptSlice.actions

@@ -8,7 +8,7 @@ function SubContainer() {
       const langKey= useSelector((store=>store.configure.language))
 
     return (
-        movies.nowPlayingMovies && (
+        movies && (
             <div className='bg-black min-h-screen'>
                 <div className='-mt-32 md:-mt-52 relative z-20 pb-10'>
                     <div className='pt-4 space-y-2 md:space-y-4'>

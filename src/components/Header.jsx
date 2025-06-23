@@ -16,6 +16,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const langKey= useSelector((store=>store.configure.language))
+  const showGptSearch = useSelector(store=>store.gpt.showGptSearch)
   
   const handleSignOut = () => {
     signOut(auth)
@@ -28,8 +29,14 @@ const Header = () => {
   };
   const handleGptSearch=()=>{
     dispatch(toggleGptSearchView());
+    if (showGptSearch){
+      navigate('/browse')
+    }
+    else{
+      navigate('/search')
+    }
   }
-  const showGptSearch = useSelector(store=>store.gpt.showGptSearch)
+
   const handleLanguageChange = (e)=>{
     dispatch(changeLanguage(e.target.value))
   }
