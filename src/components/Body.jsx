@@ -2,7 +2,7 @@
 import Login from './Login';
 import Header from './Header';
 import BrowseContent from './BrowseContent';
-import GptSearch from './gptSearch';
+import GptSearch from './GptSearch';
 import MovieInfo from './MovieInfo';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 

@@ -2,7 +2,7 @@ import logo from '../utils/logo.png';
 import userIcon from '../utils/Netflix-avatar.png';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { signOut, onAuthStateChanged } from 'firebase/auth'; // Added onAuthStateChanged
+import { signOut, onAuthStateChanged } from 'firebase/auth'; 
 import { auth } from '../utils/firebase';
 import { removeUser, addUser } from '../utils/userSlice'; // Added addUser
 import { useEffect } from 'react'; // Added useEffect
@@ -57,36 +57,38 @@ const Header = () => {
 
 
   return (
-    <div className="w-full h-[80px] bg-gradient-to-b from-black/80 to-transparent px-10 py-4 flex justify-between items-center absolute z-10">
-      <img src={logo} alt="logo" className="w-44" />
+    <div className="w-full md:h-[80px] bg-gradient-to-b from-black/80 to-transparent px-10 md:py-4 flex flex-col md:flex-row md:justify-between items-center absolute z-10 ">
+      <img src={logo} alt="logo" className="w-44 mx-auto md:mx-0" />
 
       {user &&
-       (        
-        <div className="flex items-center gap-3  px-4 py-2 rounded-lg shadow-md">
+       ( 
+        <div className="flex  items-center gap-3  px-4 py-2 rounded-lg shadow-md">
           
             <select className='bg-gray-800 text-white p-2 rounded-lg' onChange={handleLanguageChange}>
               {SUPPORTED_LANGUAGES.map(lang=><option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)}
             </select>
           
-          <button className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600  cursor-pointer text-white font-semibold px-3 py-1.5 rounded-md transition"
+          <button className={`bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 hover:from-blue-600 hover:via-purple-600 hover:to-pink-600  cursor-pointer text-white font-semibold    rounded-md transition
+          ${showGptSearch? 'px-4 py-2 md:px-3 md:py-1.5':'px-4  md:px-3 md:py-1.5'}`}
           onClick={handleGptSearch}>
-          {showGptSearch?lang[langKey].home:lang[langKey].movieRecommender}
+          {showGptSearch? lang[langKey].home :lang[langKey].movieRecommender}
 
           </button>
           <img
             src={userIcon}
             alt="User Avatar"
-            className="w-9 h-9 rounded-full object-cover border"
+            className="hidden md:block w-9 h-9 rounded-full object-cover border"
           />
-          <span className="text-white font-medium">{user.displayName}</span>
+          <span className="hidden md:block text-white font-medium">{user.displayName}</span>
 
           <button
             onClick={handleSignOut}
-            className="bg-red-500 hover:bg-red-600 cursor-pointer text-white font-semibold px-3 py-1.5 rounded-md transition"
+            className="bg-red-500 hover:bg-red-600 cursor-pointer text-white font-semibold px-4 py-2 whitespace-nowrap  md:px-3 md:py-1.5 rounded-md transition"
           >
            {lang[langKey].signOut}
           </button>
         </div>
+
       )
       }
     </div>

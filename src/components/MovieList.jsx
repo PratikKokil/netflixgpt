@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toggleGptSearchView } from '../utils/GptSlice';
-
+import Shimmer from './Shimmer';
 
 const MovieList = ({ title, movies }) => {
   const scrollRef = useRef();
@@ -24,7 +24,7 @@ const MovieList = ({ title, movies }) => {
   }
 
   if (filteredMovies.length === 0) {
-    return <div className="text-white text-center">Loading...</div>;
+    return <Shimmer/>;
   }
 
   return (

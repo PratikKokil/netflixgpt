@@ -3,11 +3,18 @@ import VideoBackground from "./VideoBackground";
 import useMovieDetails from "../hooks/useMovieDetails";
 import { useSelector } from "react-redux";
 import { Poster_CDN_URL } from "../utils/constant";
+import Shimmer from "./Shimmer";
 
 const MovieInfo = () => {
     const { movieid } = useParams();
     const movieDetails = useSelector(store=>store.movies.movieDetails)
     useMovieDetails(movieid);
+
+    if(!movieDetails){
+        return (
+            <Shimmer/>
+        )
+    }
 
     return (
         
@@ -22,8 +29,9 @@ const MovieInfo = () => {
             ></div>
             
             {/* Video Section */}
+            <div className="pt-40 md:pt-0">
             <VideoBackground movieId={movieid} />
-
+            </div>
             {/* Movie Info Section */}
         <div className="flex flex-col md:flex-row items-start gap-10 px-8 py-12 text-white bg-opacity-60 backdrop-blur-md rounded-lg shadow-lg     mx-auto">
         {/* Movie Details Section */}

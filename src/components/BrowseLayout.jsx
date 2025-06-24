@@ -1,6 +1,6 @@
 import Header from './Header';
 import { Outlet } from 'react-router-dom';
-import GptSearch from './gptSearch';
+import GptSearch from './GptSearch';
 import { useSelector } from 'react-redux';
 
 const BrowseLayout = () => {

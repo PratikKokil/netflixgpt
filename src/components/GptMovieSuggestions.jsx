@@ -10,9 +10,9 @@ const {gptMovieResults,gptSearchMovies}= useSelector(store=>store.gpt);
     return null;
      }
    return(
-    <>
+    <div className=''>
     {gptSearchMovies.map((movieName,index)=> <MovieList key={movieName} title={movieName} movies={gptMovieResults[index]}/>)}
-    </>
+    </div>
    )
 
 }
