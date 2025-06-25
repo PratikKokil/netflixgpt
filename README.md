@@ -1,12 +1,35 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🎬 NetflixGPT
 
-Currently, two official plugins are available:
+NetflixGPT is a smart movie browsing UI inspired by Netflix.  
+It leverages **React**, **Redux**, **GPT**, and **Firebase Hosting** to give users a modern movie discovery experience using the TMDB API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🔧 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ⚛️ React
+- ⚡ Vite
+- 🔥 Firebase Hosting
+- 🎨 TailwindCSS
+- 🧠 GPT (OpenAI)
+- 📦 Redux Toolkit & React-Redux
+- 🎞️ TMDB API
+
+---
+
+## 🧠 Redux State Management
+
+This project uses **Redux Toolkit** to manage global app state.  
+Key slices in the Redux store include:
+
+- **userSlice** – Handles user login/logout & authentication
+- **movieSlice** – Stores movies fetched from TMDB API
+- **gptSlice** – Manages GPT search results and suggestions
+ 
+ ## Deployed App 👉  https://netflixgpt-10240.web.app
+
+ Made with ❤️ by Pratik Kokil
+
+
