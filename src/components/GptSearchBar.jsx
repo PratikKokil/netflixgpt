@@ -1,21 +1,24 @@
 import React, { useRef } from 'react'
 import lang from '../utils/languageConstants'
 import { useDispatch, useSelector } from 'react-redux'
-import openai from '../utils/googleGenAi'
 import ai from '../utils/googleGenAi'
 import { options } from '../utils/constant'
 import { addGptMovieResults } from '../utils/GptSlice'
+import ErrorPage from './ErrorPage'
 
 const GptSearchBar = () => {
    const langKey= useSelector((store=>store.configure.language))
    const searchText = useRef(null);
    const dispatch = useDispatch();
 
-  const searchMovieTMDB=async(movieName)=>{
+   const searchMovieTMDB=async(movieName)=>{
     const data=await fetch('https://api.themoviedb.org/3/search/movie?query='+movieName+'&include_adult=false&language=en-US&page=1', options)
     const json = await data.json();
     const movieList= json.results;
+    console.log(movieName)
+    console.log(movieList);
     const filteredData = movieList.filter(movie=> movie.original_title = movieName && movie.poster_path)
+    console.log(filteredData)
     return filteredData;
   }
   const handleGptSearch= async()=>{
@@ -28,9 +31,9 @@ const GptSearchBar = () => {
          model: "gemini-2.0-flash",
           contents: query,
          });
-      // if(!response){
-      //   // <Error/>
-      // }      
+      if(!response){
+        <ErrorPage/>
+      }      
 
        const movieList = response.text.split(",");
        const promiseArray=movieList.map(movie=>searchMovieTMDB(movie));

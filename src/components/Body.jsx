@@ -4,6 +4,7 @@ import Header from './Header';
 import BrowseContent from './BrowseContent';
 import GptSearch from './GptSearch';
 import MovieInfo from './MovieInfo';
+import ErrorPage from './ErrorPage'
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 
 // Layout component for routes that need header
@@ -36,8 +37,16 @@ const approuter = createBrowserRouter([
       {
         path: "movie/:movieid",
         element: <MovieInfo />
+      },
+      {
+        path: "*", 
+        element: <ErrorPage />
       }
     ]
+  },
+   {
+    path: "*", 
+    element: <ErrorPage />
   }
 ]);
 

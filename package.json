@@ -13,7 +13,7 @@
     "@google/genai": "^1.5.1",
     "@reduxjs/toolkit": "^2.8.1",
     "@tailwindcss/vite": "^4.1.5",
-    "firebase": "^11.7.1",
+    "firebase": "^11.9.1",
     "lucide-react": "^0.518.0",
     "openai": "^5.3.0",
     "react": "^19.0.0",
